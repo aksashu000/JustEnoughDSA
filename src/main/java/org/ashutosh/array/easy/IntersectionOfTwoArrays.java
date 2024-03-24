@@ -25,15 +25,15 @@ public class IntersectionOfTwoArrays {
     public static void main(String[] args) {
         int[] arr1 = {4,9,5};
         int[] arr2 = {9,4,9,8,4};
-        System.out.println(Arrays.toString(intersection(arr1, arr2)));
+        System.out.println(Arrays.toString(getIntersectionOfTwoArrays(arr1, arr2)));
 
         int[] arr3 = {1,2,2,1};
         int[] arr4 = {2,2};
-        System.out.println(Arrays.toString(intersection(arr3, arr4)));
+        System.out.println(Arrays.toString(getIntersectionOfTwoArraysWithSortingAndBinarySearch(arr3, arr4)));
     }
 
     //Time Complexity: O(m+n) => m = length of first array, n = length of second array
-    public static int[] intersection(int[] arr1, int[] arr2) {
+    public static int[] getIntersectionOfTwoArrays(int[] arr1, int[] arr2) {
         Set<Integer> set = new HashSet<>();
         Set<Integer> intersectionSet = new HashSet<>();
         for (int j : arr1) {
@@ -53,7 +53,7 @@ public class IntersectionOfTwoArrays {
     }
 
     //Time Complexity: O(n * logn)
-    public static int[] findIntersectionWithSortingAndBinarySearch(int[] arr1, int[] arr2) {
+    public static int[] getIntersectionOfTwoArraysWithSortingAndBinarySearch(int[] arr1, int[] arr2) {
         Set<Integer> set = new HashSet<>();
         Arrays.sort(arr2);
         for (Integer num : arr1) {
