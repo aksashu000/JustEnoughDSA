@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.ashutosh.algorithms.search.BinarySearch.binarySearch;
+
 /*
 Given two integer arrays arr1 and arr2, return an array of their intersection.
 Each element in the result must be unique and you may return the result in any order.
@@ -29,11 +31,35 @@ public class IntersectionOfTwoArrays {
 
         int[] arr3 = {1,2,2,1};
         int[] arr4 = {2,2};
-        System.out.println(Arrays.toString(getIntersectionOfTwoArraysWithSortingAndBinarySearch(arr3, arr4)));
+        System.out.println(Arrays.toString(getIntersectionOfTwoArraysTimeOptimized(arr3, arr4)));
+
+        int[] arr5 = {4,9,2,7,3};
+        int[] arr6 = {10};
+        System.out.println(Arrays.toString(getIntersectionOfTwoArraysWithSortingAndBinarySearch(arr5, arr6)));
+    }
+
+
+    public static int[] getIntersectionOfTwoArrays(int[] arr1, int[] arr2){
+        Set<Integer> intersectionSet = new HashSet<>();
+        for (int num1 : arr1) {
+            for (int num2 : arr2) {
+                if (num1 == num2) {
+                    intersectionSet.add(num1);
+                }
+            }
+        }
+
+        int[] result = new int[intersectionSet.size()];
+        int i = 0;
+        for (Integer num : intersectionSet) {
+            result[i++] = num;
+        }
+        return result;
+
     }
 
     //Time Complexity: O(m+n) => m = length of first array, n = length of second array
-    public static int[] getIntersectionOfTwoArrays(int[] arr1, int[] arr2) {
+    public static int[] getIntersectionOfTwoArraysTimeOptimized(int[] arr1, int[] arr2) {
         Set<Integer> set = new HashSet<>();
         Set<Integer> intersectionSet = new HashSet<>();
         for (int j : arr1) {
@@ -57,7 +83,7 @@ public class IntersectionOfTwoArrays {
         Set<Integer> set = new HashSet<>();
         Arrays.sort(arr2);
         for (Integer num : arr1) {
-            if (binarySearch(arr2, num)) {
+            if (binarySearch(arr2, num) != -1) {
                 set.add(num);
             }
         }
@@ -67,23 +93,5 @@ public class IntersectionOfTwoArrays {
             result[i++] = num;
         }
         return result;
-    }
-
-    //This is a helper method for Binary Search
-    public static boolean binarySearch(int[] arr, int target) {
-        int low = 0;
-        int high = arr.length - 1;
-        while (low <= high) {
-            int mid = low + (high - low) / 2;
-            if (arr[mid] == target) {
-                return true;
-            }
-            if (arr[mid] > target) {
-                high = mid - 1;
-            } else {
-                low = mid + 1;
-            }
-        }
-        return false;
     }
 }
